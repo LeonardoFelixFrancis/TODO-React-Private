@@ -5,13 +5,15 @@ import { useState } from "react";
 import { ChangeEvent } from "react";
 import Button from "../button/button";
 import { ButtomTypes } from "../../enums/style_enums";
+import { createTask, updateTask } from "../../services/task_service";
 
 interface TaskCardProp{
     task:Task;
-    onCancelEvent: (task:Task) => void
+    onDeleteEvent: (task:Task) => void;
+    onSubmitEvent: (task:Task) => void;
 }
 
-function TaskCard({task, onCancelEvent}:TaskCardProp){
+function TaskCard({task, onDeleteEvent}:TaskCardProp){
 
     const [task_title, setTitle] = useState(task.title)
     const [task_description, setDescription] = useState(task.description)
@@ -37,14 +39,33 @@ function TaskCard({task, onCancelEvent}:TaskCardProp){
             id: task.id
         }
 
-        onCancelEvent(taskToDelete)
+        onDeleteEvent(taskToDelete)
+    }
+
+    const handleSubmit = async() => {
+
+        const taskToSave:Task = {
+            title: task_title,
+            description: task_description,
+            id: task.id
+        }
+        
+        let response;
+
+        if (taskToSave.id != null){
+            response = await updateTask(taskToSave)
+        }else{
+            response = await createTask(taskToSave)
+        }
+
+        console.log(response)
     }
 
     return <div className={style.task_card}>
 
         <h3 className={style.title}>{task_title}</h3>
 
-        <Input label="" external_value={task_title} onChange={handleTitleChange}></Input>
+        <Input label="" external_value={task_title} onChange={handleTitleChange} type="text"></Input>
 
         <textarea name="description" className={style.description} value={task_description} onChange={handleDescriptionChange}></textarea>
 
@@ -52,7 +73,7 @@ function TaskCard({task, onCancelEvent}:TaskCardProp){
 
             <Button type={ButtomTypes.small} text="Excluir" action={handleDelete}></Button>
 
-            <Button type={ButtomTypes.small} text="Excluir"></Button>
+            <Button type={ButtomTypes.small} text="Salvar" action={handleSubmit}></Button>
 
         </div>
 

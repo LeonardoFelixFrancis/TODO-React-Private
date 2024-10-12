@@ -2,11 +2,14 @@ import Input from "../components/input/input"
 import Button from "../components/button/button"
 import { ButtomTypes } from "../enums/style_enums"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 function LoginPage(){
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const navigate = useNavigate();
 
     const handleEmailChange = (value:string) => {
         setEmail(value)
@@ -17,7 +20,7 @@ function LoginPage(){
     }
 
     const loginHandle = () => {
-        return
+        navigate('/home')
     }
 
     return <div>

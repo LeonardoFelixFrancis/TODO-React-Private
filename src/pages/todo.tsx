@@ -19,17 +19,18 @@ function TodoPage(){
     }
 
     useEffect(() => {
-        loadTask()
+        loadTask();
     }, [])
 
     const openTaskCard = (task:Task) => {
    
-        setTask(task)
+        setTask(task);
     }
 
     const closeDeleteConfirm = () => {
-        setShowDelete(false)
-        loadTask()
+        setShowDelete(false);
+        loadTask();
+        setTask(null);
     }
     
 
@@ -37,10 +38,15 @@ function TodoPage(){
         setShowDelete(true)
     }
 
+    const onSubmitEvent = () => {
+        setTask(null);
+        loadTask();
+    }
+
     let taskCard = <></>
 
     if (selectedTask != null){
-        taskCard = <TaskCard task={selectedTask} onDeleteEvent={onDeleteEvent}></TaskCard>
+        taskCard = <TaskCard task={selectedTask} onDeleteEvent={onDeleteEvent} onSubmitEvent={onSubmitEvent}></TaskCard>
     }else{
         taskCard = <></>
     }

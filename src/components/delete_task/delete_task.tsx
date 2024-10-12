@@ -2,6 +2,7 @@ import { Task } from "../../models/task_model";
 import style from './delete.module.css'
 import Button from "../button/button";
 import { ButtomTypes } from "../../enums/style_enums";
+import { deleteTask } from "../../services/task_service";
 
 interface deleteTaskProp{
     task:Task;
@@ -14,7 +15,10 @@ function DeleteTask({task, close}:deleteTaskProp){
         close()
     }
 
-    const handleDelete = () => {
+    const handleDelete = async() => {
+        
+        let response = await deleteTask(task.id!);
+
         close()
     }
 

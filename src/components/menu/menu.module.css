@@ -1,0 +1,25 @@
+.menu{
+    flex: 1;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.menu_line{
+    display: flex;
+    justify-content: start;
+    align-content: center;
+    gap: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+}
+
+.todo_img{
+    width: 10px;
+    height: 1-px;
+}

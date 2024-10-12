@@ -1,0 +1,14 @@
+.button{
+    width: 100px;
+    height: 30px;
+    background-color: rgb(55, 140, 238);
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-family: Roboto;
+}
+
+.button:hover{
+    background-color: rgb(43, 118, 204);
+    cursor: pointer;
+}

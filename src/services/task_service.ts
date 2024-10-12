@@ -70,7 +70,7 @@ export const updateTask = async(task:Task) => {
 
 export const deleteTask = async(id:number) => {
     try{
-        const response = await fetch(`${ApiUrl}/${id}`,
+        const response = await fetch(`${ApiUrl}/task/${id}`,
             {
                 method:'DELETE',
                 headers:{

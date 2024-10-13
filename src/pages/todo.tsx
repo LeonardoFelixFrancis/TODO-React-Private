@@ -6,12 +6,17 @@ import AddTask from "../components/add_task/add_task"
 import { listTasks } from "../services/task_service"
 import { Task } from "../models/task_model"
 import DeleteTask from "../components/delete_task/delete_task"
+import { deleteTask } from "../services/task_service"
+import { createTask } from "../services/task_service"
+import { Response } from "../models/response"
+import ResponseCard from "../components/response_card/response_card"
 
 function TodoPage(){
 
     const [selectedTask, setTask] = useState<Task|null>(null)
     const [taskLit, setTaskList] = useState([])
     const [showDelete, setShowDelete] = useState(false)
+    const [response, setResponse] = useState<Response|null>(null)
 
     const loadTask = async () => {
         const responseList = await listTasks()
@@ -23,8 +28,9 @@ function TodoPage(){
     }, [])
 
     const openTaskCard = (task:Task) => {
-   
-        setTask(task);
+        if (selectedTask == null){
+            setTask(task);
+        }
     }
 
     const closeDeleteConfirm = () => {
@@ -34,19 +40,46 @@ function TodoPage(){
     }
     
 
-    const onDeleteEvent = () => {
+    const onOpenDeleteEvent = () => {
         setShowDelete(true)
     }
 
-    const onSubmitEvent = () => {
+    const onDeleteEvent = async(task:Task) => {
+        const response = await deleteTask(task.id!)
+
+        setResponse(
+            {
+                message:response.message,
+                status_code:response.status_code,
+                data:response.data
+            }
+        )
+        dismis()
+    }
+
+    const onSubmitEvent = async(task:Task) => {
+        const response = await createTask(task)
+        setResponse(
+            {
+                message:response.message,
+                status_code:response.status_code,
+                data:response.data
+            }
+        )
+        dismis()
+    }
+
+    const dismis = () => {
         setTask(null);
         loadTask();
     }
 
+
+
     let taskCard = <></>
 
     if (selectedTask != null){
-        taskCard = <TaskCard task={selectedTask} onDeleteEvent={onDeleteEvent} onSubmitEvent={onSubmitEvent}></TaskCard>
+        taskCard = <TaskCard task={selectedTask} onDeleteEvent={onOpenDeleteEvent} onSubmitEvent={onSubmitEvent} dismis={dismis}></TaskCard>
     }else{
         taskCard = <></>
     }
@@ -54,10 +87,18 @@ function TodoPage(){
     let confirmDelete  = <></>
 
     if (showDelete && selectedTask != null){
-        confirmDelete = <DeleteTask task={selectedTask} close={closeDeleteConfirm}></DeleteTask>
+        confirmDelete = <><DeleteTask task={selectedTask} close={closeDeleteConfirm} deleteAction={onDeleteEvent}></DeleteTask><div className="overlay"></div></>
     }else{
         confirmDelete  = <></>
     }
+
+    
+    let response_el = <></>
+    
+    if (response != null){
+        response_el = <ResponseCard message={response?.message} status={response?.status_code} dismis={setResponse}></ResponseCard>
+    }
+    
 
     return <div className="todo-container">
 
@@ -78,7 +119,8 @@ function TodoPage(){
         
         {confirmDelete}
         
-        
+        {response_el}
+
     </div>
 
 }

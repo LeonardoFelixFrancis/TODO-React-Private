@@ -1,0 +1,46 @@
+.delete_confirm{
+    width: 500px;
+    height: 300px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.445);
+    z-index: 99;
+}
+
+.buttons{
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+}
+
+.title{
+    color: rgb(233, 70, 30);
+}
+
+@media only screen and (max-width: 550px){
+    .delete_confirm{
+        width: 400px;
+    }
+}
+
+@media only screen and (max-width: 430px){
+    .delete_confirm{
+        width: 350px;
+    }
+}
+
+
+@media only screen and (max-width: 370px){
+    .delete_confirm{
+        width: 300px;
+    }
+}

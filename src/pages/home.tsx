@@ -4,7 +4,12 @@ function Home(){
 
     return <div className="home-container">
 
-        <Menu></Menu>
+        <div className="home_wrapper">
+            <Menu></Menu>
+
+            <div className="task-list"></div>
+
+        </div>
 
     </div>
 

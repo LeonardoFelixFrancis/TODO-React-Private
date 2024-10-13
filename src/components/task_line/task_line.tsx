@@ -14,11 +14,11 @@ function TaskLine({task, openTaskFunc}:taskLine){
         openTaskFunc(task)
     }
 
-    return <div className={style.task}>
+    return <div className={style.task} onClick={handleOpen}>
 
         <h4 className={style.title}>{task.title}</h4>
 
-        <img className={style.open_task} src={right_arrow} alt="" onClick={handleOpen}/>
+        <img className={style.open_task} src={right_arrow} alt="" />
 
     </div>
 

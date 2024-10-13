@@ -1,0 +1,23 @@
+.response{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgb(103, 255, 103);
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.response p{
+    margin: 0px;
+}
+
+.error_response{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgb(255, 0, 0);
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}

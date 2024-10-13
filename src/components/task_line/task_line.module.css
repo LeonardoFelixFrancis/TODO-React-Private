@@ -1,0 +1,27 @@
+.task{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.task:hover{
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
+
+
+
+.title{
+    justify-self: start;
+}
+
+.open_task{
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+}

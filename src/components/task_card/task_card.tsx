@@ -2,33 +2,31 @@ import { Task } from "../../models/task_model";
 import style from './task_card.module.css'
 import Input from "../input/input";
 import { useState } from "react";
-import { ChangeEvent } from "react";
 import Button from "../button/button";
 import { ButtomTypes } from "../../enums/style_enums";
-import { createTask, updateTask } from "../../services/task_service";
+
 
 interface TaskCardProp{
     task:Task;
     onDeleteEvent: (task:Task) => void;
-    onSubmitEvent: () => void;
+    onSubmitEvent: (task:Task) => void;
+    dismis: () => void
 }
 
-function TaskCard({task, onDeleteEvent, onSubmitEvent}:TaskCardProp){
+function TaskCard({task, onDeleteEvent, onSubmitEvent, dismis}:TaskCardProp){
 
     const [task_title, setTitle] = useState(task.title)
     const [task_description, setDescription] = useState(task.description)
+
+    const [errorTitle, setErrorTitle] = useState<string|null>(null)
+    const [errorDescription, setErrorDescription] = useState<string|null>(null)
 
     const handleTitleChange = (value:string) => {
         setTitle(value)
     }
 
-    const handleDescriptionChange = (event:ChangeEvent<HTMLTextAreaElement>) => {
-        const newValue = event.target.value;
-
-        if (newValue != null){
-            setDescription(newValue)
-        }
-
+    const handleDescriptionChange = (value:string) => {
+            setDescription(value)
     }
 
     const handleCancelOrDelete = () => {
@@ -42,7 +40,7 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent}:TaskCardProp){
 
             onDeleteEvent(taskToDelete)
         }else{
-            onSubmitEvent()
+            dismis()
         }
 
     }
@@ -54,17 +52,28 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent}:TaskCardProp){
             description: task_description,
             id: task.id
         }
-        
-        let response;
 
-        if (taskToSave.id != null){
-            response = await updateTask(taskToSave)
-        }else{
-            response = await createTask(taskToSave)
+        let error = false;
+        console.log(taskToSave.title.length)
+        if (taskToSave.title == null || taskToSave.title.length == 0){
+            setErrorTitle('O Título é um campo obrigatório')
+            error = true;
         }
 
-        onSubmitEvent()
+        if (taskToSave.description == null || taskToSave.description.length == 0){
+            setErrorDescription('A Descrição é um campo obrigatório')
+            error = true;
+        }
+        
+        if (error){
+            return null
+        }
+
+        onSubmitEvent(taskToSave)
+
+        dismis()
     }
+
 
     let secondaryActionText = ''
 
@@ -76,13 +85,29 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent}:TaskCardProp){
 
     return <div className={style.task_card}>
 
-        <h3 className={style.title}>{task_title ? task_title != '' : 'Título da Tarefa'}</h3>
+        <h3 className={style.title}>{task_title != '' ? task_title : 'Título da Tarefa'}</h3>
 
-        <Input label="Título" external_value={task_title} onChange={handleTitleChange} type="text" ></Input>
+        <Input label="Título" external_value={task_title} onChange={handleTitleChange} type="text" is_text_area={false} external_error={errorTitle} clearExternalError={setErrorTitle} validationFunction={
+            (value:string) => {
+                if (value.length > 55){
+                    return 'O titulo não pode ter mais que 55 caracteres';
+                }
 
-        <textarea name="description" className={style.description} value={task_description} onChange={handleDescriptionChange}></textarea>
+                return null;
+            }
+        }></Input>
 
-        <div className="buttons">
+        <Input label="Descrição" external_value={task_description} onChange={handleDescriptionChange} type="text" is_text_area={true} external_error={errorDescription} clearExternalError={setErrorDescription} validationFunction={(value:string) => {
+            if (value.length > 255){
+                return 'A descrição não pode ter mais que 255 caracteres';
+            }
+
+            return null
+        }}></Input>
+        
+        
+
+        <div className={style.buttons}>
 
             <Button type={ButtomTypes.small} text={secondaryActionText} action={handleCancelOrDelete}></Button>
 

@@ -1,5 +1,6 @@
 import Input from "../components/input/input"
 import Button from "../components/button/button"
+import logo from "../assets/logo.svg"
 import { ButtomTypes } from "../enums/style_enums"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -23,17 +24,21 @@ function LoginPage(){
         navigate('/home')
     }
 
-    return <div>
+    return <div className="login-wrapper">
 
-        <img src="" alt="" />
+        <div className="img-container">
+            <img className="logo" src={logo} alt="" />
+        </div>
 
         <div className="login-container">
 
             <h2>Entrar</h2>
-            <Input label={null} type="email" external_value={email} onChange={handleEmailChange}></Input>
-            <Input label={null} type="password" external_value={password} onChange={handlePasswordChange}></Input>
+            <Input label={'E-mail'} type="email" external_value={email} onChange={handleEmailChange} validationFunction={(value:string) => {return null}}></Input>
+            <Input label={'Senha'} type="password" external_value={password} onChange={handlePasswordChange} validationFunction={(value:string) => {return null}}></Input>
 
-            <Button type={ButtomTypes.extend} text="Entrar" action={loginHandle}></Button>
+            <div className="buttons">
+                <Button type={ButtomTypes.extend} text="Entrar" action={loginHandle}></Button>
+            </div>
 
         </div>
 

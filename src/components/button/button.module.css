@@ -4,8 +4,8 @@
     background-color: rgb(55, 140, 238);
     border: none;
     border-radius: 5px;
-    margin: 10px;
     font-family: Roboto;
+    color: white;
 }
 
 .button:hover{

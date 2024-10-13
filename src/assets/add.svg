@@ -3,10 +3,10 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #dadada;
+        fill: #378cee;
       }
     </style>
   </defs>
-  <rect class="cls-1" x="25.7" y="0" width="8.17" height="59.57" rx="4.09" ry="4.09"/>
-  <rect class="cls-1" x="25.7" y="-.26" width="8.17" height="59.57" rx="4.09" ry="4.09" transform="translate(59.32 -.26) rotate(90)"/>
+  <path class="cls-1" d="M29.78,0h0c2.26,0,4.08,1.83,4.08,4.09v51.39c0,2.26-1.83,4.09-4.08,4.09h0c-2.26,0-4.08-1.83-4.08-4.09V4.09c0-2.26,1.83-4.09,4.08-4.09Z"/>
+  <rect class="cls-1" y="25.44" width="59.57" height="8.17" rx="4.08" ry="4.08"/>
 </svg>

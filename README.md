@@ -13,7 +13,8 @@ Versão do node utilizada: v22.9.0 | Versão do NPM utilizada: 10.9.0
 E-mail:  
   - Campo do tipo texto
   - Campo obrigatório
-  - Validação de formato  
+  - Validação de formato
+    
 Senha:  
   - Campo do tipo texto  
   - Máscara de senha
@@ -33,7 +34,8 @@ Ao clickar no botão de acesso, uma requisição vai ser enviada ao back-end con
 
 E-mail:  
   - Campo do tipo texto  
-  - Validação de formato  
+  - Validação de formato
+    
 Senha:  
   - Campo do tipo texto  
   - Máscara de senha  
@@ -77,10 +79,17 @@ Essa região do sistema lista todas as tarefas ja criadas pelo usuário.
 Título:  
   - Campo do tipo texto
   - Campo obrigatório
-  - No máximo 55 caracteres 
+  - No máximo 55 caracteres
+    
 Descrição:  
   - Campo do tipo texto  
   - Campo obrigatório
-  - No máximo 255 caracteres 
+  - No máximo 255 caracteres
+
+##### Botões de ação
+ - Cancelar: Ao clickar em cancelar, o região de cadastro será fechada
+ - Salvar: Ao clickar em salvar, a tarefa com os dados informados será enviada ao back-end, se não houver nenhum erro a tarefa será cadastrada, caso contrário uma mensagem de erro será informada no canto inferior direito da tela.
+   
+     
 
 

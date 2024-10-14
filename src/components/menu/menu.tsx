@@ -12,7 +12,7 @@ function Menu(){
 
         localStorage.removeItem('token');
 
-        navigate('/home')
+        navigate('/')
     }
 
     return <div className={style.menu}>

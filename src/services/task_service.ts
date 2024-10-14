@@ -1,6 +1,7 @@
 import { Task } from "../models/task_model";
 import { unauthenticateUser } from "./auth_service";
-const ApiUrl = 'http://localhost:5000';
+
+const ApiUrl = 'http://localhost:5000/api';
 
 
 export const listTasks = async () => {

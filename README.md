@@ -46,7 +46,8 @@ Ao clickar no Botão para realizar cadastro, uma requisição vai ser enviada ao
   - Se houver algum erro na autenticação do usuário, uma mensagem na parte inferior direita será mostrada.
 
 ### Tela de Home
-![Uploading home.png…]()
+![home](https://github.com/user-attachments/assets/615403b1-4597-4291-8db0-bf6d5a3868a0)
+
 
 ##### Botão de sair
 Ao clickar no botão de sair, a sessão do usuário será finalizada e ele será redirecionado á tela de login

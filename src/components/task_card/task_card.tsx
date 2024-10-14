@@ -5,7 +5,6 @@ import { useState } from "react";
 import Button from "../button/button";
 import { ButtomTypes } from "../../enums/style_enums";
 
-
 interface TaskCardProp{
     task:Task;
     onDeleteEvent: (task:Task) => void;

@@ -1,50 +1,124 @@
-# React + TypeScript + Vite
+#### Como rodar o projeto
+1) Clonar o projeto em um diretório qualquer
+2) Rodar no diretório clonado o comando: `npm install`
+3) Rodar no diretório clonado o comando: `npm run dev`
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Versões utilizadas no desenvolvimento:
+Versão do node utilizada: v22.9.0 | Versão do NPM utilizada: 10.9.0
 
-Currently, two official plugins are available:
+### Tela de Login
+![login](https://github.com/user-attachments/assets/3a811993-eea8-4097-bce2-11d72aeadb5e)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##### Região de inputs  
+E-mail:  
+  - Campo do tipo texto
+  - Campo obrigatório
+  - Validação de formato
+    
+Senha:  
+  - Campo do tipo texto  
+  - Máscara de senha
+  - Campo obrigatório
+  - No mínimo 8 caracteres  
+    
+##### Botão de cadastro  
+Ao clickar no botão de cadastro, a tela de cadastro vai ser exibida ao usuário
 
-## Expanding the ESLint configuration
+##### Botão de Acesso  
+Ao clickar no botão de acesso, uma requisição vai ser enviada ao back-end contendo os dados informados nos inputs.  
+  - Se o usuário for autenticado ele será redirecionado para a página de Home
+  - Se houver algum erro na autenticação do usuário, uma mensagem na parte inferior direita será mostrada.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Tela de Registro
+![registro](https://github.com/user-attachments/assets/f645a4c9-c32d-41d7-8b3b-706c9d8ae57e)
 
-- Configure the top-level `parserOptions` property like this:
+E-mail:  
+  - Campo do tipo texto  
+  - Validação de formato
+    
+Senha:  
+  - Campo do tipo texto  
+  - Máscara de senha  
+  - No mínimo 8 caracteres  
+    
+##### Botão de voltar ao login  
+Ao clickar no botão voltar ao login, a tela de login vai ser exibida ao usuário.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+##### Botão para realizar cadastro  
+Ao clickar no Botão para realizar cadastro, uma requisição vai ser enviada ao back-end contendo os dados informados nos inputs.  
+  - Se os dados informados a Api estiverem corretos, o usuário vai ser cadastrado
+  - Se houver algum erro na autenticação do usuário, uma mensagem na parte inferior direita será mostrada.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Tela de Home
+![home](https://github.com/user-attachments/assets/615403b1-4597-4291-8db0-bf6d5a3868a0)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+##### Botão de sair
+Ao clickar no botão de sair, a sessão do usuário será finalizada e ele será redirecionado á tela de login
+
+##### Botão de navegar para a To-do list
+Ao clickar no botão de navegar para a To-do list, o usuário será redirecionado para a tela que contém as funcionalidades principais do sistema, como cadastro ou leitura das tarefas.
+
+### Tela Principal
+
+![todo_list_1](https://github.com/user-attachments/assets/5e0cd786-4296-403b-9108-d16be14c7a3e)
+
+##### Botão para adicionar nova tarefa
+Ao Clickar no botão para adicionar nova tarefa, será aberto a direita da tela a região que possibilitará ao usuário realizar o cadasto de uma nova tarefa.
+
+##### Listagem das tarefas já criadas
+Essa região do sistema lista todas as tarefas ja criadas pelo usuário.
+  - Ao clickar em qualquer tarefa da lista, será aberto uma região que permitirá a edição da tarefa.
+
+
+### Tela Principal | Cadastro de tarefa
+
+![todo_list_create_task](https://github.com/user-attachments/assets/c55a5c06-f073-4306-9a45-045f82c1dba5)
+
+##### Região de inputs  
+Título:  
+  - Campo do tipo texto
+  - Campo obrigatório
+  - No máximo 55 caracteres
+    
+Descrição:  
+  - Campo do tipo texto  
+  - Campo obrigatório
+  - No máximo 255 caracteres
+
+##### Botões de ação
+ - Cancelar: Ao clickar em cancelar, a região de cadastro será fechada
+ - Salvar: Ao clickar em salvar, a tarefa com os dados informados será enviada ao back-end, se não houver nenhum erro a tarefa será cadastrada, caso contrário uma mensagem de erro será informada no canto inferior direito da tela.
+   
+### Tela Principal | Edição de tarefa
+
+![todo_list_edit_task](https://github.com/user-attachments/assets/17166186-97f0-43ca-b307-8e57f1449d44)
+##### Região de inputs  
+Título:  
+  - Campo do tipo texto
+  - Campo obrigatório
+  - No máximo 55 caracteres
+    
+Descrição:  
+  - Campo do tipo texto  
+  - Campo obrigatório
+  - No máximo 255 caracteres
+
+##### Botões de ação
+ - Excluir: Ao clickar em Excluir, o modal de validação de exclusão será exibido.
+ - Salvar: Ao clickar em salvar, a tarefa com os dados informados será enviada ao back-end, se não houver nenhum erro a tarefa será atualizada, caso contrário uma mensagem de erro será informada no canto inferior direito da tela.
+
+### Tela Principal | Confirmação de exclusão.
+
+![todo_list_delete_task](https://github.com/user-attachments/assets/04abcbda-50f6-41b7-8817-5c85d215d52e)
+
+##### Modal de confirmação
+O Modal de confirmação exibe uma mensagem informando ao usuário que ele está prestes a excluir uma tarefa.
+
+##### Botões de Ação
+ - Cancelar: Ao clickar em cancelar, o modal será fechado junto com a região de cadastro.
+ - Excluir: Ao clickar em excluir, uma requisição será feita ao back-end onde caso nenhum erro ocorra, a tarefa será excluída. Caso contrário uma mensagem será exibita no canto inferior direito da tela.
+
+
+
+

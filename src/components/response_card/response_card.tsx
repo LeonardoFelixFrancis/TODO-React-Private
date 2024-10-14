@@ -1,6 +1,6 @@
 
 import style from './response_card.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 interface ResponseProps{
     message:string,
@@ -10,22 +10,12 @@ interface ResponseProps{
 
 function ResponseCard({message, status, dismis}:ResponseProps){
 
-    const [currentInterval, setCurrentInterval] = useState<number | null>(null);
-
     useEffect(() => {
        
-        const interval = setInterval(() => {
-            
+        setInterval(() => {
             dismis(null);
         }, 5000);
         
-        setCurrentInterval(interval);
-
-        return () => {
-            if (currentInterval) {
-                clearInterval(currentInterval);
-            }
-        };
     }, []);
 
 

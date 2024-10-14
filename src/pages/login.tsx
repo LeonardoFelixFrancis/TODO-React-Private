@@ -53,6 +53,10 @@ function LoginPage(){
                     password : password
                 }
             )
+            
+            if (apiResponse != null){
+                setApiResponse(null)
+            }
 
             setApiResponse({
                 message:response.message,
@@ -93,6 +97,10 @@ function LoginPage(){
                 email : email,
                 password : password
             });
+
+            if (apiResponse != null){
+                setApiResponse(null)
+            }
 
             setApiResponse({
                 message:response.message,

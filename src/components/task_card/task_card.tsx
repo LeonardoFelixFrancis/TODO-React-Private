@@ -20,6 +20,8 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent, dismis}:TaskCardProp){
 
     const [errorTitle, setErrorTitle] = useState<string|null>(null)
     const [errorDescription, setErrorDescription] = useState<string|null>(null)
+    const [titleHaveError, setTitleHaveError] = useState<boolean>(false);
+    const [descriptionHaveError, setDescriptionHaveError] = useState<boolean>(false);
 
     const handleTitleChange = (value:string) => {
         setTitle(value)
@@ -54,7 +56,7 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent, dismis}:TaskCardProp){
         }
 
         let error = false;
-        console.log(taskToSave.title.length)
+
         if (taskToSave.title == null || taskToSave.title.length == 0){
             setErrorTitle('O Título é um campo obrigatório')
             error = true;
@@ -65,13 +67,12 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent, dismis}:TaskCardProp){
             error = true;
         }
         
-        if (error){
-            return null
+       
+        if (!error && !descriptionHaveError && !titleHaveError){
+            onSubmitEvent(taskToSave)
+            dismis()
         }
 
-        onSubmitEvent(taskToSave)
-
-        dismis()
     }
 
 
@@ -90,7 +91,10 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent, dismis}:TaskCardProp){
         <Input label="Título" external_value={task_title} onChange={handleTitleChange} type="text" is_text_area={false} external_error={errorTitle} clearExternalError={setErrorTitle} validationFunction={
             (value:string) => {
                 if (value.length > 55){
+                    setTitleHaveError(true);
                     return 'O titulo não pode ter mais que 55 caracteres';
+                }else{
+                    setTitleHaveError(false);
                 }
 
                 return null;
@@ -99,7 +103,10 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent, dismis}:TaskCardProp){
 
         <Input label="Descrição" external_value={task_description} onChange={handleDescriptionChange} type="text" is_text_area={true} external_error={errorDescription} clearExternalError={setErrorDescription} validationFunction={(value:string) => {
             if (value.length > 255){
+                setDescriptionHaveError(true);
                 return 'A descrição não pode ter mais que 255 caracteres';
+            }else{
+                setDescriptionHaveError(false);
             }
 
             return null

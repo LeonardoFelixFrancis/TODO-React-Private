@@ -19,7 +19,7 @@ function TodoPage(){
     const [selectedTask, setTask] = useState<Task|null>(null)
     const [taskLit, setTaskList] = useState([])
     const [showDelete, setShowDelete] = useState(false)
-    const [response, setResponse] = useState<Response|null>(null)
+    const [apiResponse, setResponse] = useState<Response|null>(null)
 
     const loadTask = async () => {
         const responseList = await listTasks()
@@ -61,6 +61,10 @@ function TodoPage(){
 
     const onDeleteEvent = async(task:Task) => {
         const response = await deleteTask(task.id!)
+        
+        if (apiResponse != null){
+            setResponse(null)
+        }
 
         setResponse(
             {
@@ -80,6 +84,9 @@ function TodoPage(){
             response = await updateTask(task);
         }
 
+        if (apiResponse != null){
+            setResponse(null)
+        }
 
         setResponse(
             {
@@ -117,8 +124,8 @@ function TodoPage(){
     
     let response_el = <></>
     
-    if (response != null){
-        response_el = <ResponseCard message={response?.message} status={response?.status_code} dismis={setResponse}></ResponseCard>
+    if (apiResponse != null){
+        response_el = <ResponseCard message={apiResponse?.message} status={apiResponse?.status_code} dismis={setResponse}></ResponseCard>
     }
     
 

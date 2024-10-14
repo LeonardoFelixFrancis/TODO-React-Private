@@ -3,15 +3,18 @@ import Menu from "../components/menu/menu"
 import TaskCard from "../components/task_card/task_card"
 import TaskLine from "../components/task_line/task_line"
 import AddTask from "../components/add_task/add_task"
-import { listTasks } from "../services/task_service"
+import { listTasks, updateTask } from "../services/task_service"
 import { Task } from "../models/task_model"
 import DeleteTask from "../components/delete_task/delete_task"
 import { deleteTask } from "../services/task_service"
 import { createTask } from "../services/task_service"
 import { Response } from "../models/response"
 import ResponseCard from "../components/response_card/response_card"
+import { useNavigate } from "react-router-dom"
 
 function TodoPage(){
+
+    const navigate = useNavigate()
 
     const [selectedTask, setTask] = useState<Task|null>(null)
     const [taskLit, setTaskList] = useState([])
@@ -20,11 +23,23 @@ function TodoPage(){
 
     const loadTask = async () => {
         const responseList = await listTasks()
+
+        if (responseList.data == null){
+            setTaskList([])
+        }else{
         setTaskList(responseList.data)
+        }
     }
 
     useEffect(() => {
         loadTask();
+
+        const token = localStorage.getItem('token')
+
+        if (token == null){
+            navigate('/')
+        }
+
     }, [])
 
     const openTaskCard = (task:Task) => {
@@ -58,7 +73,14 @@ function TodoPage(){
     }
 
     const onSubmitEvent = async(task:Task) => {
-        const response = await createTask(task)
+        let response;
+        if (task.id == null){
+            response = await createTask(task);
+        }else{
+            response = await updateTask(task);
+        }
+
+
         setResponse(
             {
                 message:response.message,

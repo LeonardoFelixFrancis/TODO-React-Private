@@ -9,6 +9,9 @@ function Menu(){
     const navigate = useNavigate()
 
     const handleExit = () => {
+
+        localStorage.removeItem('token');
+
         navigate('/')
     }
 

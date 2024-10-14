@@ -90,6 +90,22 @@ Descrição:
  - Cancelar: Ao clickar em cancelar, o região de cadastro será fechada
  - Salvar: Ao clickar em salvar, a tarefa com os dados informados será enviada ao back-end, se não houver nenhum erro a tarefa será cadastrada, caso contrário uma mensagem de erro será informada no canto inferior direito da tela.
    
-     
+### Tela Principal | Edição de tarefa
+
+![todo_list_edit_task](https://github.com/user-attachments/assets/17166186-97f0-43ca-b307-8e57f1449d44)
+##### Região de inputs  
+Título:  
+  - Campo do tipo texto
+  - Campo obrigatório
+  - No máximo 55 caracteres
+    
+Descrição:  
+  - Campo do tipo texto  
+  - Campo obrigatório
+  - No máximo 255 caracteres
+
+##### Botões de ação
+ - Excluir: Ao clickar em Excluir, o modal de validação de exclusão será exibido.
+ - Salvar: Ao clickar em salvar, a tarefa com os dados informados será enviada ao back-end, se não houver nenhum erro a tarefa será atualizada, caso contrário uma mensagem de erro será informada no canto inferior direito da tela.
 
 

@@ -1,4 +1,4 @@
-![todo_list_delete_task](https://github.com/user-attachments/assets/d7f937bc-c91a-4572-ae85-e719d7386605)#### Como rodar o projeto
+#### Como rodar o projeto
 1) Clonar o projeto em um diretório qualquer
 2) Rodar no diretório clonado o comando: `npm install`
 3) Rodar no diretório clonado o comando: `npm run dev`

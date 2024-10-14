@@ -6,7 +6,7 @@
 Versões utilizadas no desenvolvimento:
 Versão do node utilizada: v22.9.0 | Versão do NPM utilizada: 10.9.0
 
-#### Tela de Login
+### Tela de Login
 ![login](https://github.com/user-attachments/assets/3a811993-eea8-4097-bce2-11d72aeadb5e)
 
 ##### Região de inputs  
@@ -26,7 +26,7 @@ Ao clickar no botão de acesso, uma requisição vai ser enviada ao back-end con
   - Se o usuário for autenticado ele será redirecionado para a página de Home
   - Se houver algum erro na autenticação do usuário, uma mensagem na parte inferior direita será mostrada.
 
-#### Tela de Registro
+### Tela de Registro
 ![registro](https://github.com/user-attachments/assets/f645a4c9-c32d-41d7-8b3b-706c9d8ae57e)
 
 E-mail:  
@@ -44,4 +44,14 @@ Ao clickar no botão voltar ao login, a tela de login vai ser exibida ao usuári
 Ao clickar no Botão para realizar cadastro, uma requisição vai ser enviada ao back-end contendo os dados informados nos inputs.  
   - Se os dados informados a Api estiverem corretos, o usuário vai ser cadastrado
   - Se houver algum erro na autenticação do usuário, uma mensagem na parte inferior direita será mostrada.
+
+### Tela de Home
+![Uploading home.png…]()
+
+##### Botão de sair
+Ao clickar no botão de sair, a sessão do usuário será finalizada e ele será redirecionado á tela de login
+
+##### Botão de navegar para a To-do list
+Ao clickar no botão de navegar para a To-do list, o usuário será redirecionado para a tela que contém as funcionalidades principais do sistema, como cadastro ou leitura das tarefas.
+
 

@@ -1,4 +1,4 @@
-#### Como rodar o projeto
+![todo_list_delete_task](https://github.com/user-attachments/assets/d7f937bc-c91a-4572-ae85-e719d7386605)#### Como rodar o projeto
 1) Clonar o projeto em um diretório qualquer
 2) Rodar no diretório clonado o comando: `npm install`
 3) Rodar no diretório clonado o comando: `npm run dev`
@@ -87,7 +87,7 @@ Descrição:
   - No máximo 255 caracteres
 
 ##### Botões de ação
- - Cancelar: Ao clickar em cancelar, o região de cadastro será fechada
+ - Cancelar: Ao clickar em cancelar, a região de cadastro será fechada
  - Salvar: Ao clickar em salvar, a tarefa com os dados informados será enviada ao back-end, se não houver nenhum erro a tarefa será cadastrada, caso contrário uma mensagem de erro será informada no canto inferior direito da tela.
    
 ### Tela Principal | Edição de tarefa
@@ -107,5 +107,18 @@ Descrição:
 ##### Botões de ação
  - Excluir: Ao clickar em Excluir, o modal de validação de exclusão será exibido.
  - Salvar: Ao clickar em salvar, a tarefa com os dados informados será enviada ao back-end, se não houver nenhum erro a tarefa será atualizada, caso contrário uma mensagem de erro será informada no canto inferior direito da tela.
+
+### Tela Principal | Confirmação de exclusão.
+
+![todo_list_delete_task](https://github.com/user-attachments/assets/04abcbda-50f6-41b7-8817-5c85d215d52e)
+
+##### Modal de confirmação
+O Modal de confirmação exibe uma mensagem informando ao usuário que ele está prestes a excluir uma tarefa.
+
+##### Botões de Ação
+ - Cancelar: Ao clickar em cancelar, o modal será fechado junto com a região de cadastro.
+ - Excluir: Ao clickar em excluir, uma requisição será feita ao back-end onde caso nenhum erro ocorra, a tarefa será excluída. Caso contrário uma mensagem será exibita no canto inferior direito da tela.
+
+
 
 

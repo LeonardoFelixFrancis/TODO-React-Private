@@ -9,6 +9,14 @@
 }
 
 .button:hover{
-    background-color: rgb(43, 118, 204);
+    background-color: rgb(31, 99, 177);
     cursor: pointer;
+}
+
+.button_warning{
+    background-color: rgb(238, 55, 55);
+}
+
+.button_warning:hover{
+    background-color: rgb(168, 38, 38);
 }

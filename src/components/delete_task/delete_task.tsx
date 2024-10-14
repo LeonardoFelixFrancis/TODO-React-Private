@@ -32,7 +32,7 @@ function DeleteTask({task, deleteAction,close}:deleteTaskProp){
 
             <Button text="Cancelar" action={handleCancel} type={ButtomTypes.small}></Button>
 
-            <Button text="Excluir" action={handleDelete} type={ButtomTypes.small}></Button>
+            <Button text="Excluir" action={handleDelete} type={ButtomTypes.small} is_warning_button={true}></Button>
 
         </div>
 

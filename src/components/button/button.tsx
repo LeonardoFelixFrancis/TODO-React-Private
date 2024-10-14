@@ -4,10 +4,11 @@ import { ButtomTypes } from '../../enums/style_enums';
 interface ButtonProps{
     text:string;
     type:ButtomTypes;
+    is_warning_button?:boolean;
     action: () => void
 }
 
-function Button({text, type, action}:ButtonProps){
+function Button({text, type, is_warning_button=false, action}:ButtonProps){
 
     let button_style;
 
@@ -24,6 +25,10 @@ function Button({text, type, action}:ButtonProps){
         case 'xt':
             button_style = style.xt_button;
             break;
+    }
+
+    if (is_warning_button){
+        button_style = `${button_style} ${style.button_warning}`
     }
 
     return <button className={`${button_style} ${style.button}`} onClick={action}>{text}</button>

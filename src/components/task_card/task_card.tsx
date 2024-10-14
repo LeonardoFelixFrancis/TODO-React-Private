@@ -116,7 +116,7 @@ function TaskCard({task, onDeleteEvent, onSubmitEvent, dismis}:TaskCardProp){
 
         <div className={style.buttons}>
 
-            <Button type={ButtomTypes.small} text={secondaryActionText} action={handleCancelOrDelete}></Button>
+            <Button type={ButtomTypes.small} text={secondaryActionText} action={handleCancelOrDelete} is_warning_button={true}></Button>
 
             <Button type={ButtomTypes.small} text="Salvar" action={handleSubmit}></Button>
 

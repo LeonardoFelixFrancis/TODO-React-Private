@@ -1,6 +1,6 @@
 import { User } from "../models/user_model";
 
-const ApiUrl = 'http://localhost:5000/user/api/';
+const ApiUrl = 'http://localhost:5000/api/user';
 
 export const register = async (user:User) => {
 

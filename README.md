@@ -11,11 +11,13 @@ Versão do node utilizada: v22.9.0 | Versão do NPM utilizada: 10.9.0
 
 ##### Região de inputs  
 E-mail:  
-  - Campo do tipo texto  
+  - Campo do tipo texto
+  - Campo obrigatório
   - Validação de formato  
 Senha:  
   - Campo do tipo texto  
-  - Máscara de senha  
+  - Máscara de senha
+  - Campo obrigatório
   - No mínimo 8 caracteres  
     
 ##### Botão de cadastro  
@@ -54,5 +56,31 @@ Ao clickar no botão de sair, a sessão do usuário será finalizada e ele será
 
 ##### Botão de navegar para a To-do list
 Ao clickar no botão de navegar para a To-do list, o usuário será redirecionado para a tela que contém as funcionalidades principais do sistema, como cadastro ou leitura das tarefas.
+
+### Tela Principal
+
+![todo_list_1](https://github.com/user-attachments/assets/5e0cd786-4296-403b-9108-d16be14c7a3e)
+
+##### Botão para adicionar nova tarefa
+Ao Clickar no botão para adicionar nova tarefa, será aberto a direita da tela a região que possibilitará ao usuário realizar o cadasto de uma nova tarefa.
+
+##### Listagem das tarefas já criadas
+Essa região do sistema lista todas as tarefas ja criadas pelo usuário.
+  - Ao clickar em qualquer tarefa da lista, será aberto uma região que permitirá a edição da tarefa.
+
+
+### Tela Principal | Cadastro de tarefa
+
+![todo_list_create_task](https://github.com/user-attachments/assets/c55a5c06-f073-4306-9a45-045f82c1dba5)
+
+##### Região de inputs  
+Título:  
+  - Campo do tipo texto
+  - Campo obrigatório
+  - No máximo 55 caracteres 
+Descrição:  
+  - Campo do tipo texto  
+  - Campo obrigatório
+  - No máximo 255 caracteres 
 
 

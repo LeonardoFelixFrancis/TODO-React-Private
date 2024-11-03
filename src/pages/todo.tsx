@@ -10,11 +10,9 @@ import { deleteTask } from "../services/task_service"
 import { createTask } from "../services/task_service"
 import { Response } from "../models/response"
 import ResponseCard from "../components/response_card/response_card"
-import { useNavigate } from "react-router-dom"
+
 
 function TodoPage(){
-
-    const navigate = useNavigate()
 
     const [selectedTask, setTask] = useState<Task|null>(null)
     const [taskLit, setTaskList] = useState([])
@@ -33,12 +31,6 @@ function TodoPage(){
 
     useEffect(() => {
         loadTask();
-
-        const token = localStorage.getItem('token')
-
-        if (token == null){
-            navigate('/')
-        }
 
     }, [])
 

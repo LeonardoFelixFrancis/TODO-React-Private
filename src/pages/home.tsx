@@ -1,20 +1,6 @@
-import { useEffect } from "react"
 import Menu from "../components/menu/menu"
-import { useNavigate } from "react-router-dom"
 
 function Home(){
-
-    const navigate = useNavigate()
-
-    useEffect(() => {
-
-        const token = localStorage.getItem('token')
-        console.log(token)
-        if (token == null){
-            navigate('/')
-        }
-
-    }, [])
 
     return <div className="home-container">
 

@@ -1,50 +1,25 @@
 import { User } from "../models/user_model";
-
-const ApiUrl = 'http://localhost:5000/api/user';
+import api from "../api/api";
+import { redirect } from "react-router-dom";
 
 export const register = async (user:User) => {
-
-    try{
-
-        
-        const response = await fetch(`${ApiUrl}/register/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        });
-
-        return response.json()
-    } catch (error){
-        console.error('Error', error)
-        throw error
-    }
-
+    const response = await api.post('user/register', user);
+    return response.data;
 }
 
 export const login = async (user:User) => {
 
-    try{
-
-        
-        const response = await fetch(`${ApiUrl}/login/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        });
-
-        return response.json()
-    } catch (error){
-        console.error('Error', error)
-        throw error
-    }
+   const response = await api.post('user/login', user);
+   return response.data
 
 }
 
-export const unauthenticateUser = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user')
+export const AuthLoader = () => {
+    const token = localStorage.getItem('token');
+
+    if (!token){
+        return redirect('/')
+    }
+
+    return true;
 }

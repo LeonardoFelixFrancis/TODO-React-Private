@@ -1,36 +1,20 @@
 import LoginPage from './pages/login';
 import Home from './pages/home';
 import TodoPage from './pages/todo';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AuthLoader } from './services/auth_service';
 import './App.css'
-import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-
-    const token = localStorage.getItem('token')
-
-    if (token == null){
-      setIsAuthenticated(false);
-    }else{
-      setIsAuthenticated(true);
-    }
-
-  })
-
+  const router = createBrowserRouter([
+    { path:'/', element: <LoginPage />},
+    { path: 'home', element: <Home />, loader:AuthLoader},
+    { path: 'todo', element: <TodoPage />, loader:AuthLoader}
+  ])
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Define routes for each component */}
-        <Route index element={isAuthenticated ? <Navigate to={'/home'} replace /> : <LoginPage />} />
-        <Route path="home" element={<Home />} />
-        <Route path="todo" element={<TodoPage />} />
-      </Routes>
-  </BrowserRouter>
+    <RouterProvider router={router}></RouterProvider>
   )
 }
 

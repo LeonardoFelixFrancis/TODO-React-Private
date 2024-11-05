@@ -13,12 +13,12 @@ export const getTaskById = async(id:number) => {
 }
 
 export const createTask = async(task:Task) => {
-    const response = await api.post('task', task);
+    const response = await api.post('task/', task);
     return response.data
 }
 
 export const updateTask = async(task:Task) => {
-    const response = await api.put('task', task);
+    const response = await api.put('task/', task);
     return response.data
 }
 

@@ -50,7 +50,8 @@ function LoginPage(){
                 {
                     id:null,
                     email : email,
-                    password : password
+                    password : password,
+                    username : null
                 }
             )
             
@@ -95,7 +96,8 @@ function LoginPage(){
             const response = await register({
                 id:null,
                 email : email,
-                password : password
+                password : password,
+                username : null
             });
 
             if (apiResponse != null){

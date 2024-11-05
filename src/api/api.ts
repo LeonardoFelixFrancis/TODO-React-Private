@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 const api = axios.create({
-    baseURL: `${process.env.BACK_END_API}`,
+    baseURL: `${import.meta.env.VITE_BACK_END_API}`,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -9,10 +9,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (request: InternalAxiosRequestConfig) => {
-        
+
         const token = localStorage.getItem('token') != null ? localStorage.getItem('token') : "";
-        
-        request.headers['Authorization'] = `Bearer ${token}`;
+        request.headers['Authorization'] = `${token}`;
 
         return request;
     },
@@ -22,16 +21,16 @@ api.interceptors.request.use(
 )
 
 api.interceptors.response.use(
-    (response: AxiosResponse) => response,
+    (response: AxiosResponse) => {return response},
     (error) => {
         if (error.response) {
             const {logout} = error.response.data;
-
             if (logout) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
-                window.location.href = '/';
             }
+
+            return Promise.reject(error);
         }
     }
 )

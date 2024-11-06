@@ -31,129 +31,86 @@ function LoginPage(){
         setPassword(value)
     }
 
-    const loginHandle = async () => {
-        
-        let error = false;
+    const authHandle = async (authFn: typeof login | typeof register) => {
 
-        if (email == null || email.length == 0){
-            setEmailError('O E-mail é um campo obrigatório')
-            error = true;
+        validateEmail()
+        validatePassword()
+
+        if (emailError != null || passwordError != null){
+            return null;
         }
 
-        if (password == null || password.length == 0){
-            setPasswordError('A Senha um campo obrigatório')
-            error = true;
+        const response = await authFn({
+            id:null,
+            email : email,
+            password : password,
+            username : null
+        });
+
+        if (apiResponse != null){
+            setApiResponse(null)
         }
         
-        if (!error){
-            const response = await login(
-                {
-                    id:null,
-                    email : email,
-                    password : password,
-                    username : null
-                }
-            )
+        console.log(response)
+
+        setApiResponse({
+            message:response.message,
+            data:response.data,
+            status_code:response.status_code,
+        });
+        
+        if (response.status_code != 200){
+            return;
+        }
+
+        if (authFn === register){
+            changeRegisteringState();
+        }
+
+        if (authFn === login){
+            const token = response.token;
+            const user = response.data
             
-            if (apiResponse != null){
-                setApiResponse(null)
-            }
+            localStorage.setItem('token', token)
+            localStorage.setItem('user', user)
 
-            setApiResponse({
-                message:response.message,
-                data:response.data,
-                status_code:response.status_code,
-            })
-
-            if (response.status_code == 200){
-
-                const token = response.token;
-                const user = response.data
-                
-                localStorage.setItem('token', token)
-                localStorage.setItem('user', user)
-
-                navigate('home')
-            }
-
+            navigate('home')
         }
+        
     }
 
-    const registerHandle = async () => {
-        let error = false;
-
+    const validateEmail = () => {
         if (email == null || email.length == 0){
-            setEmailError('O E-mail é um campo obrigatório')
-            error = true;
+            setEmailError('O E-mail é um campo obrigatório');
+            return null;
         }
 
-        if (password == null || password.length == 0){
-            setPasswordError('A Senha um campo obrigatório');
-            error = true;
-        }
-
-        if (!error){
-            const response = await register({
-                id:null,
-                email : email,
-                password : password,
-                username : null
-            });
-
-            if (apiResponse != null){
-                setApiResponse(null)
-            }
-
-            setApiResponse({
-                message:response.message,
-                data:response.data,
-                status_code:response.status_code,
-            });
-            
-            if (response.status_code == 200){
-                changeRegisteringState();
-            }
-
-        }
-
-    }
-
-    const validateEmail = (value:string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!emailRegex.test(value)){
-            return 'Favor informar um e-mail em um formato válido!';
+        if (!emailRegex.test(email)){
+            setEmailError('Favor informar um e-mail em um formato válido!')
+            return null;
         }
 
-        return null
+        setEmailError(null);
     }
 
-    const validatePassword = (value:string) => {
-
-        if (value.length < 8){
-            return 'A Senha precisa ter pelo menos 8 caracteres.'
+    const validatePassword = () => {
+        if (password == null || password.length == 0){
+            setPasswordError('A Senha um campo obrigatório.');
+            return null;
         }
-        
-        return null;
 
+        if (password.length < 8){
+            setPasswordError('A Senha precisa ter pelo menos 8 caracteres.');
+            return null;
+        }
+
+        setPasswordError(null);
     }
 
     const changeRegisteringState = () => {
         setRegistering(!registering)
-    }
-
-    let changeStateEllement = <></>
-
-    if (registering){
-        changeStateEllement = <p className="changeState" onClick={changeRegisteringState}>Voltar</p>
-    }else{
-        changeStateEllement = <p className="changeState" onClick={changeRegisteringState}>Cadastrar-se</p>
-    }
-
-    let apiResponseEl = <></>
-
-    if (apiResponse != null){
-        apiResponseEl = <ResponseCard message={apiResponse.message} status={apiResponse.status_code} dismis={setApiResponse}></ResponseCard>
     }
 
     return <div className="login-wrapper">
@@ -169,30 +126,26 @@ function LoginPage(){
                    type="email" 
                    external_value={email} 
                    onChange={handleEmailChange} 
-                   validationFunction={validateEmail} 
                    is_text_area={false} 
-                   external_error={emailError} 
-                   clearExternalError={setEmailError}></Input>
+                   external_error={emailError} ></Input>
 
             <Input label={'Senha'} 
                    type="password" 
                    external_value={password} 
                    onChange={handlePasswordChange} 
                    is_text_area={false} 
-                   validationFunction={validatePassword} 
-                   external_error={passwordError} 
-                   clearExternalError={setPasswordError}></Input>
+                   external_error={passwordError} ></Input>
 
             
 
             <div className="buttons">
-                {changeStateEllement}
-                <Button type={ButtomTypes.extend} text={registering ? 'Fazer Registro' : 'Entrar'} action={registering ? registerHandle : loginHandle}></Button>
+                {registering ? <p className="changeState" onClick={changeRegisteringState}>Voltar</p> : <p className="changeState" onClick={changeRegisteringState}>Cadastrar-se</p>}
+                <Button type={ButtomTypes.extend} text={registering ? 'Fazer Registro' : 'Entrar'} action={() => authHandle(registering ? register : login)}></Button>
             </div>
 
         </div>
 
-        {apiResponseEl}
+        {apiResponse != null && <ResponseCard message={apiResponse.message} status={apiResponse.status_code} dismis={setApiResponse}></ResponseCard>}
 
     </div>
 

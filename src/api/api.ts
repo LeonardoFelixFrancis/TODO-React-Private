@@ -16,7 +16,7 @@ api.interceptors.request.use(
         return request;
     },
     (error) => {
-        return Promise.reject(error);
+        return error;
     }
 )
 
@@ -29,9 +29,9 @@ api.interceptors.response.use(
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
             }
-
-            return Promise.reject(error);
+   
         }
+        return error.response;
     }
 )
 

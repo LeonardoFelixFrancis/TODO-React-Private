@@ -2,7 +2,7 @@ import { User } from "../models/user_model";
 import api from "../api/api";
 
 export const register = async (user:User) => {
-    const response = await api.post('user/register', user);
+    const response = await api.post('user/register/', user);
     return response.data;
 }
 

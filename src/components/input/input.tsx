@@ -3,19 +3,16 @@ import { ChangeEvent } from "react";
 import styles from './input.module.css'
 import { useEffect } from "react";
 
-
 interface InputProps{
     label:string|null;
     external_value:string;
     external_error:string|null;
     type:string;
     is_text_area:boolean;
-    clearExternalError: (value:null) => void,
-    validationFunction: (value:string) => string|null;
     onChange: (value: string) => void;
 }
 
-function Input({label, external_value, external_error, type, is_text_area,clearExternalError,validationFunction, onChange }:InputProps){
+function Input({label, external_value, external_error, type, is_text_area, onChange }:InputProps){
 
     const [internal_value, setValue] = useState(external_value)
 
@@ -28,55 +25,28 @@ function Input({label, external_value, external_error, type, is_text_area,clearE
       }, [external_error]); 
 
     const handleChange = (event:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+
         const input_value = event.target.value
 
-        const error_msg = validationFunction(input_value);
-
-        if (error_msg != null){
-            setError(error_msg)
-        }else{
-            setError(null)
-        }
-
-        if (input_value != null){
-            setValue(input_value);
-            onChange(input_value);
-            clearExternalError(null);
-        }
+        setValue(input_value);
+        onChange(input_value);
         
     }
 
-
-
-    let label_el = <label className={styles.label} htmlFor="">{label}</label>
-
-    if (label == null){
-        label_el = <></>
-    }
-
-    let input = <></>
-
-    if (!is_text_area){
-        input = <input className={error != null ? `${styles.input} ${styles.bottom_less_radius}` : styles.input} id="input" value={internal_value} onChange={handleChange} type={type}></input>
-    }else{
-        input = <textarea className={error != null ? `${styles.text_area} ${styles.bottom_less_radius}` : styles.text_area} value={internal_value} onChange={handleChange}></textarea>
-    }
-
-    let error_ellement = <></>
-
-    if (error != null){ 
-        error_ellement = <div className={styles.error}>
-                            <p>{error}</p>
-                        </div>
-    }
 
     return <div className={styles.input_wrapper}>
         
-        {label_el}
+        {label != null ? <label className={styles.label} htmlFor="">{label}</label> : <></>}
         
         <div className={styles.input_error_wrapper}>
-            {input}
-            {error_ellement}
+            {is_text_area ? <textarea className={error != null ? `${styles.text_area} ${styles.bottom_less_radius}` : styles.text_area} value={internal_value} onChange={handleChange}></textarea>
+                          : <input className={error == null ? "border-2 border-gray-300 text-gray-900 text-sm rounded-lg w-full h-10 p-1 focus:outline-none focus:border-blue-500" :
+                                                              "border-2 border-red-700 border- text-gray-900 text-sm rounded-lg w-full h-10 p-1 focus:outline-none"
+                          } id="input" onChange={handleChange} type={type}></input>}
+            
+            {error != null ? <div className="bg-none mt-1">
+                                <p className="text-red-500">{error}</p>
+                             </div> : <></>}
         </div>
 
     </div>

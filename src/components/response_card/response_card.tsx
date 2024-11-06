@@ -1,6 +1,6 @@
 
 import style from './response_card.module.css'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface ResponseProps{
     message:string,
@@ -10,13 +10,19 @@ interface ResponseProps{
 
 function ResponseCard({message, status, dismis}:ResponseProps){
 
+    const timeout = useRef<NodeJS.Timeout>()
+
     useEffect(() => {
-       
-        setInterval(() => {
+        
+        if (timeout.current){
+            clearTimeout(timeout.current)
+        }
+
+        timeout.current = setTimeout(() => {
             dismis(null);
         }, 5000);
         
-    }, []);
+    }, [message]);
 
 
 

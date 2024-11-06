@@ -11,6 +11,10 @@ body{
   margin: 0px;
 }
 
+input {
+  font-family: "Roboto", sans-serif;
+}
+
 .todo-container{
   display: flex;
   width: 100%;

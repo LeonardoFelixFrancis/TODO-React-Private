@@ -1,4 +1,5 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import store from "../store";
 
 const api = axios.create({
     baseURL: `${import.meta.env.VITE_BACK_END_API}`,
@@ -28,6 +29,14 @@ api.interceptors.response.use(
             if (logout) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
+
+                const state = store.getState();
+                const navigate = state.navigation.navigate;
+
+                if (navigate){
+                    navigate('/');
+                }
+
             }
    
         }
